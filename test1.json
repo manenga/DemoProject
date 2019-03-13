@@ -1,0 +1,75 @@
+{
+    "cities": [
+        {
+            "id": 1,
+            "name": "Cape Town"
+        {
+            "id": 2,
+            "name": "Johannesburg",
+            "mall": [
+                {
+                    "id": 3,
+                    "name": "Mall of Africa",
+                    "shops": [
+                        {
+                            "id": 5,
+                            "name": "Woolworths"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Pick n Pay"
+                        }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "name": "Menlin Main",
+                    "shops": []
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Durban",
+            "malls": []
+        },
+        {
+            "id": 4,
+            "name": "Port Elizabeth",
+            "malls": [
+                {
+                    "id": 7,
+                    "name": "Green Acres",
+                    "shops": [
+                        {
+                            "id": 13,
+                            "name": "Clicks"
+                        },
+                        {
+                            "id": 14,
+                            "name": "Spar"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "Baywest Mall",
+                    "shop": [
+                        {
+                            "id": 15,
+                            "name": "Checkers"
+                        },
+                        {
+                            "id": 16,
+                            "name": "Clicks"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "name": "Bloemfontein"
+        }
+    ]
+}

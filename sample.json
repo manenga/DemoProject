@@ -1,0 +1,174 @@
+{
+    "cities": [
+        {
+            "id": 1,
+            "name": "Cape Town",
+            "malls": [
+                {
+                    "id": 1,
+                    "name": "Century City",
+                    "shops": [
+                        {
+                            "id": 1,
+                            "name": "Nespresso"
+                        },
+                        {
+                            "id": 2,
+                            "name": "Pick n Pay"
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "name": "V&A Waterfront",
+                    "shops": [
+                        {
+                            "id": 3,
+                            "name": "Adidas"
+                        },
+                        {
+                            "id": 4,
+                            "name": "Nespresso"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Johannesburg",
+            "malls": [
+                {
+                    "id": 3,
+                    "name": "Mall of Africa",
+                    "shops": [
+                        {
+                            "id": 5,
+                            "name": "Woolworths"
+                        },
+                        {
+                            "id": 6,
+                            "name": "Pick n Pay"
+                        }
+                    ]
+                },
+                {
+                    "id": 4,
+                    "name": "Menlin Main",
+                    "shops": [
+                        {
+                            "id": 7,
+                            "name": "Nike"
+                        },
+                        {
+                            "id": 8,
+                            "name": "Checkers"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Durban",
+            "malls": [
+                {
+                    "id": 5,
+                    "name": "Gateway",
+                    "shops": [
+                        {
+                            "id": 9,
+                            "name": "Vodacom"
+                        },
+                        {
+                            "id": 10,
+                            "name": "Cellucity"
+                        }
+                    ]
+                },
+                {
+                    "id": 6,
+                    "name": "Pavillion",
+                    "shops": [
+                        {
+                            "id": 11,
+                            "name": "Vodacom"
+                        },
+                        {
+                            "id": 12,
+                            "name": "Telkom"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "Port Elizabeth",
+            "malls": [
+                {
+                    "id": 7,
+                    "name": "Green Acres",
+                    "shops": [
+                        {
+                            "id": 13,
+                            "name": "Clicks"
+                        },
+                        {
+                            "id": 14,
+                            "name": "Spar"
+                        }
+                    ]
+                },
+                {
+                    "id": 8,
+                    "name": "Baywest Mall",
+                    "shops": [
+                        {
+                            "id": 15,
+                            "name": "Checkers"
+                        },
+                        {
+                            "id": 16,
+                            "name": "Clicks"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "name": "Bloemfontein",
+            "malls": [
+                {
+                    "id": 9,
+                    "name": "Waterfront Mall",
+                    "shops": [
+                        {
+                            "id": 17,
+                            "name": "Ster-Kinekor"
+                        },
+                        {
+                            "id": 18,
+                            "name": "Woolworths"
+                        }
+                    ]
+                },
+                {
+                    "id": 10,
+                    "name": "Mimosa Mall",
+                    "shops": [
+                        {
+                            "id": 19,
+                            "name": "Woolworths"
+                        },
+                        {
+                            "id": 20,
+                            "name": "Steers"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -2,6 +2,18 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/manenga/dev/iOS/Framework/DemoProject/DemoSDK/City.swift">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/manenga/dev/iOS/Framework/DemoProject/DemoSDK/Mall.swift">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/manenga/dev/iOS/Framework/DemoProject/DemoSDK/Root.swift">
+   </FileRef>
+   <FileRef
+      location = "group:/Users/manenga/dev/iOS/Framework/DemoProject/DemoSDK/Shop.swift">
+   </FileRef>
+   <FileRef
       location = "self:DemoProject.xcodeproj">
    </FileRef>
 </Workspace>
