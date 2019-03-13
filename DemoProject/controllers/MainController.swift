@@ -19,7 +19,7 @@ class MainController: UIViewController {
     
     private var isLoading = true
     private var printLogs = false
-    private var useSample = false
+    private var useSample = true // false
     
     private let alert = UIAlertController(title: nil, message: "Loading...", preferredStyle: .alert)
     
