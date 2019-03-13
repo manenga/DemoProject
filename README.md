@@ -9,11 +9,20 @@ mall and shop. The SDK provides methods to query data
 
 ## Usage
 ```swift
-let demo = DemoSDK.createSDK(from: "sample") // loading a JSON file locally
 
-let cities = demo.getCities()
-let shops  = demo.get(object: .shops, cityName: "Durban")) // get all shops in Durban
+let cities = DemoSDK.shared.getCities()
+let shops  = DemoSDK.shared.get(object: .shops, cityName: "Durban")) // get all shops in Durban
+
 ```
 
 ## Running the Showcase App
 Open the DemoProject.xcodeproj file and run the project.
+
+## Contributing
+Pull requests are welcome. 
+For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
