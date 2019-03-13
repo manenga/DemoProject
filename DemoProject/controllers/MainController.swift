@@ -19,21 +19,24 @@ class MainController: UIViewController {
     
     private var isLoading = true
     private var printLogs = false
-    private var useSample = true
+    private var useSample = false
     
-    private var demo: DemoSDK?
     private let alert = UIAlertController(title: nil, message: "Loading...", preferredStyle: .alert)
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.showLoading()
+        
+        
+        //  if JSON is already loaded don't reload list
+        if !DemoSDK.shared.hasJSON() {
+            self.prepareList()
+            self.showLoading()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationItem.title = "Showcase"
-        self.prepareList()
     }
     
     override func viewDidLoad() {
@@ -47,9 +50,9 @@ class MainController: UIViewController {
         tableView.register(UINib.init(nibName: "LabelCell", bundle: nil), forCellReuseIdentifier: "LabelCell")
         
         if useSample {
-            demo = DemoSDK.createSDK(from: "sample")
+            DemoSDK.shared.setJSON(from: "sample")
         } else {
-            demo = DemoSDK.createSDK(fromURL: "http://www.mocky.io/v2/5b7e8bc03000005c0084c210")
+            DemoSDK.shared.setJSON(fromURL: "http://www.mocky.io/v2/5b7e8bc03000005c0084c210")
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
@@ -58,19 +61,19 @@ class MainController: UIViewController {
             
             if self.printLogs {
                 print("a. As a developer, I would like to request a list of cities.")
-                print("All Cities - \(self.demo!.getCityNames())\n")
+                print("All Cities - \(DemoSDK.shared.getCityNames())\n")
                 print("b. As a developer, I would like to request a particular city.")
-                print("Get Cape Town - \(self.demo?.get(object: .city, byName: "Cape Town"))\n")
+                print("Get Cape Town - \(DemoSDK.shared.get(object: .city, byName: "Cape Town"))\n")
                 print("c. As a developer, I would like to request a list of malls in a city.")
-                print("Get Malls in Cape Town - \(self.demo!.get(object: .mallNames, cityName: "Cape Town"))\n")
+                print("Get Malls in Cape Town - \(DemoSDK.shared.get(object: .mallNames, cityName: "Cape Town"))\n")
                 print("d. As a developer, I would like to request a particular mall in a city.")
-                print("Get V&A Waterfront - \(self.demo!.getParticular(mallName: "V&A Waterfront", inCityName: "Cape Town"))\n")
+                print("Get V&A Waterfront - \(DemoSDK.shared.getParticular(mallName: "V&A Waterfront", inCityName: "Cape Town"))\n")
                 print("e. As a developer, I would like to request a list of shops in a mall.")
-                print("Get shops at V&A Waterfront - \(self.demo!.getShops(cityName: "Cape Town", mallName: "V&A Waterfront"))\n")
+                print("Get shops at V&A Waterfront - \(DemoSDK.shared.getShops(cityName: "Cape Town", mallName: "V&A Waterfront"))\n")
                 print("f. As a developer, I would like to request a particular shop in a mall.")
-                print("Get Nike at Menlin Main in Joburg - \(self.demo!.getParticular(shopName: "Nike", inMallName: "Menlin Main", cityName: "Johannesburg"))\n")
+                print("Get Nike at Menlin Main in Joburg - \(DemoSDK.shared.getParticular(shopName: "Nike", inMallName: "Menlin Main", cityName: "Johannesburg"))\n")
                             print("g. Bonus: As a developer, I would like to request a list of shops in a city")
-                print("Get shops in Durban - \(self.demo!.get(object: .shopNames, cityName: "Durban"))")
+                print("Get shops in Durban - \(DemoSDK.shared.get(object: .shopNames, cityName: "Durban"))")
             }
         }
     }
@@ -88,29 +91,25 @@ class MainController: UIViewController {
 extension MainController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return demo?.getCities().count ?? 0
+        return DemoSDK.shared.getCities().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell") as! LabelCell
+        let name = DemoSDK.shared.getCities().compactMap({ $0.name })[indexPath.row]
+        cell.setCell(name: name)
         
-        if let name = demo?.getCities().compactMap({ $0.name })[indexPath.row] {
-            cell.setCell(name: name)
-        
-            if ((demo?.get(object: .malls, cityName: name).count ?? 0) < 1) {
-                cell.accessoryType = .detailButton
-            }
+        if ((DemoSDK.shared.get(object: .malls, cityName: name).count) < 1) {
+            cell.accessoryType = .detailButton
         }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if let name = demo?.getCities().compactMap({ $0.name })[indexPath.row] {
-            let controller = CityController.create(cityName: name, demo: demo)
-            self.navigationController?.pushViewController(controller, animated: true)
-        }
+        let name = DemoSDK.shared.getCities().compactMap({ $0.name })[indexPath.row]
+        let controller = CityController.create(cityName: name)
+        self.navigationController?.pushViewController(controller, animated: true)
     }
 }
 

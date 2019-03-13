@@ -19,32 +19,22 @@ import UIKit
 
 public class DemoSDK: NSObject {
     
+    public static let shared = DemoSDK()
     private var json: NSDictionary?
-    private static var sdk: DemoSDK = DemoSDK.init()
+    
     public enum ObjectType { case none; case city; case mall; case shop; case malls; case shops; case mallNames; case shopNames; }
     
-//    public override init() {
-//        super.init()
-//    }
-    
-    open class func createSDK(fromURL: String) -> DemoSDK {
-        let sdk  = DemoSDK.init()
-        sdk.json = sdk.loadJSON(fromURL)
-//        let result = sdk.loadJSON(fromURL, completion: { result in
-//            print("At this stage: \(result)")
-//        })
-//
-//        print("At a later stage: \(sdk.json)")
-//        sdk.cities = Root.init(fromDictionary: sdk.json).cities
-        return sdk
+    public func setJSON(fromURL: String) {
+        json = loadJSON(fromURL)
     }
     
-    open class func createSDK(from filename: String) -> DemoSDK {
-        sdk.json = sdk.loadJSON(named: filename)
-        return sdk
+    public func setJSON(from filename: String) {
+        json = loadJSON(named: filename)
     }
     
-    
+    public func hasJSON() -> Bool {
+        return json != nil
+    }
     
     //    a) request a list of cities
     public func getCities() -> [City] {
@@ -125,7 +115,6 @@ public class DemoSDK: NSObject {
         }
         return shops
     }
-    
     
     //  Load JSON files by url
     internal func loadJSON(_ address: String) -> NSDictionary? {

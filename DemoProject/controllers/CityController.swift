@@ -24,14 +24,12 @@ class CityController: UIViewController {
     }
     
     var cityName: String = ""
-    var demo: DemoSDK?
     
     private var displayType: TabType = .mall
     
-    class func create(cityName: String, demo: DemoSDK?) -> CityController {
+    class func create(cityName: String) -> CityController {
         let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CityController") as! CityController
         vc.cityName = cityName
-        vc.demo = demo
         return vc
     }
     
@@ -63,9 +61,9 @@ extension CityController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if (displayType == .shop) {
-            return demo?.get(object: .shops, cityName: cityName).count ?? 0
+            return DemoSDK.shared.get(object: .shops, cityName: cityName).count
         } else {
-            return demo?.get(object: .malls, cityName: cityName).count ?? 0
+            return DemoSDK.shared.get(object: .malls, cityName: cityName).count
         }
     }
     
@@ -73,14 +71,14 @@ extension CityController: UICollectionViewDelegate, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DetailViewCell", for: indexPath) as! DetailViewCell
         
         if (displayType == .shop) {
-            if let shops = demo?.get(object: .shops, cityName: cityName) as? [Shop] {
+            if let shops = DemoSDK.shared.get(object: .shops, cityName: cityName) as? [Shop] {
                 let name = shops[indexPath.row].name
                 cell.setCell(titleText: name, type: .shop)
             }
             
             return cell
         } else {
-            if let malls = demo?.get(object: .malls, cityName: cityName) as? [Mall] {
+            if let malls = DemoSDK.shared.get(object: .malls, cityName: cityName) as? [Mall] {
                 let name: String = malls[indexPath.row].name
                 cell.setCell(titleText: name, type: .mall)
             }
@@ -92,9 +90,9 @@ extension CityController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if (displayType == .mall) {
-            if let malls = demo?.get(object: .malls, cityName: cityName) as? [Mall] {
+            if let malls = DemoSDK.shared.get(object: .malls, cityName: cityName) as? [Mall] {
                 let mallName: String = malls[indexPath.row].name
-                let controller = MallController.create(cityName: cityName, mallName: mallName, demo: demo)
+                let controller = MallController.create(cityName: cityName, mallName: mallName)
                 self.navigationController?.pushViewController(controller, animated: true)
             }
         }

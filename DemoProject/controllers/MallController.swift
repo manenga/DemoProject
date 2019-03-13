@@ -16,16 +16,14 @@ class MallController: UIViewController {
     
     var cityName: String = ""
     var mallName: String = ""
-    var demo: DemoSDK?
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var keyLabel: UILabel!
     
-    class func create(cityName: String, mallName: String, demo: DemoSDK?) -> MallController {
+    class func create(cityName: String, mallName: String) -> MallController {
         let vc = UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MallController") as! MallController
         vc.mallName = mallName
         vc.cityName = cityName
-        vc.demo = demo
         
         return vc
     }
@@ -49,20 +47,18 @@ class MallController: UIViewController {
 extension MallController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return demo?.getShops(cityName: cityName, mallName: mallName).count ?? 0
+        return DemoSDK.shared.getShops(cityName: cityName, mallName: mallName).count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell") as! LabelCell
         cell.accessoryType = .none
         
-        if let shops = demo?.getShops(cityName: cityName, mallName: mallName) {
-            let name = shops.compactMap({ $0.name })[indexPath.row]
-            cell.setCell(name: name)
-        }
+        let shops = DemoSDK.shared.getShops(cityName: cityName, mallName: mallName)
+        let name = shops.compactMap({ $0.name })[indexPath.row]
+        cell.setCell(name: name)
         
         return cell
     }
-    
 }
 
